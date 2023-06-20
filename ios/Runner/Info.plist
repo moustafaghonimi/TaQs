@@ -4,6 +4,12 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>i need location to get current location to use weather app</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>i need location to get current location to use weather app</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>i need location to get current location to use weather app</string>
 	<key>CFBundleDisplayName</key>
 	<string>Taqs</string>
 	<key>CFBundleExecutable</key>
