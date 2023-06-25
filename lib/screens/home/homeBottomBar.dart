@@ -22,6 +22,7 @@ class _MyAnimatedWavesCurves extends State<HomeWaveBottomBar> with SingleTickerP
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(duration: Duration(seconds: 4), vsync: this);
     _controller.repeat();
     //we set animation duration, and repeat for infinity

@@ -1,38 +1,72 @@
 import 'package:flutter/material.dart';
-
-String getImage(String weatherDescriptions) {
+Color getColor(String weatherDescriptions) {
   if (weatherDescriptions == 'Clear' ||
       weatherDescriptions == 'Partly cloudy') {
-    return 'assets/images/clear.png';
+    return Colors.white70;
 
   }
   else if(weatherDescriptions == 'Sunny'){
-    return 'assets/images/sunny.png';
+    return Colors.orangeAccent;
   }
   else if (weatherDescriptions== 'Blizzard' ||
       weatherDescriptions == 'Patchy snow possible' ||
       weatherDescriptions == 'Patchy sleet possible' ||
       weatherDescriptions == 'Patchy freezing drizzle possible' ||
       weatherDescriptions == 'Blowing snow') {
-    return 'assets/images/snow.png';
+    return Colors.white70;
   } else if (weatherDescriptions == 'Freezing fog' ||
       weatherDescriptions== 'Fog' ||
       weatherDescriptions == 'Heavy Cloud' ||
       weatherDescriptions == 'Mist' ||
       weatherDescriptions == 'Fog') {
-    return 'assets/images/fog.png';
+    return Colors.white70;
   } else if (weatherDescriptions == 'Patchy rain possible' ||
       weatherDescriptions == 'Heavy Rain' ||
       weatherDescriptions == 'Showers	') {
-    return 'assets/images/rainy.png';
+    return Colors.white70;
   } else if (weatherDescriptions == 'Thundery outbreaks possible' ||
       weatherDescriptions == 'Moderate or heavy snow with thunder' ||
       weatherDescriptions == 'Patchy light snow with thunder' ||
       weatherDescriptions == 'Moderate or heavy rain with thunder' ||
       weatherDescriptions == 'Patchy light rain with thunder') {
-    return 'assets/images/thunderstorm.png';
+    return Colors.white70;
   } else {
-    return 'assets/images/clear.png';
+    return Colors.white70;
+  }}
+
+String getImage(String weatherDescriptions) {
+  if (weatherDescriptions == 'Clear' ||
+      weatherDescriptions == 'Partly cloudy') {
+    return 'assets/images/clear.gif';
+
+  }
+  else if(weatherDescriptions == 'Sunny'){
+    return 'assets/images/sunny.gif';
+  }
+  else if (weatherDescriptions== 'Blizzard' ||
+      weatherDescriptions == 'Patchy snow possible' ||
+      weatherDescriptions == 'Patchy sleet possible' ||
+      weatherDescriptions == 'Patchy freezing drizzle possible' ||
+      weatherDescriptions == 'Blowing snow') {
+    return 'assets/images/snow.gif';
+  } else if (weatherDescriptions == 'Freezing fog' ||
+      weatherDescriptions== 'Fog' ||
+      weatherDescriptions == 'Heavy Cloud' ||
+      weatherDescriptions == 'Mist' ||
+      weatherDescriptions == 'Fog') {
+    return 'assets/images/fog.gif';
+  } else if (weatherDescriptions == 'Patchy rain possible' ||
+      weatherDescriptions == 'Heavy Rain' ||
+      weatherDescriptions == 'Showers	') {
+    return 'assets/images/rainy.gif';
+  } else if (weatherDescriptions == 'Thundery outbreaks possible' ||
+      weatherDescriptions == 'Moderate or heavy snow with thunder' ||
+      weatherDescriptions == 'Patchy light snow with thunder' ||
+      weatherDescriptions == 'Moderate or heavy rain with thunder' ||
+      weatherDescriptions == 'Patchy light rain with thunder') {
+    return 'assets/images/thunderstorm.gif';
+  } else {
+    return 'assets/images/clear.gif';
   }
 }
 String getImageBg(String weatherDescriptions) {

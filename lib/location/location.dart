@@ -1,10 +1,16 @@
 import 'package:location/location.dart';
+import 'package:provider/provider.dart';
+import 'package:taqs/location/convertAddresse.dart';
+import 'package:taqs/provider/weatherProvider.dart';
+
+
 
 
 Location location = Location();
 PermissionStatus? permissionStatus;
 bool serviceEnable=false;
 LocationData? locationData;
+String? currentAddress;
 
 Future<bool> isServicesEnable()async{
   serviceEnable =await location.serviceEnabled();
@@ -35,14 +41,6 @@ Future<bool> isPermissionGranted()async{
 
 }
 
-getCurrentLocation()async{
-  var permission=await isPermissionGranted();
-  if(permission==false) return;
-  var services=await isServicesEnable();
-  if(services==false) return;
-
-  locationData= await location.getLocation();
-  print('lat ${locationData?.latitude} , long ${locationData?.longitude}');
 
 
-}
+

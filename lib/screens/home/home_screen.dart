@@ -1,7 +1,11 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gif/flutter_gif.dart';
 import 'package:provider/provider.dart';
 import 'package:taqs/provider/weatherProvider.dart';
 
+import '../../location/convertAddresse.dart';
+import '../../location/location.dart';
 import '../../widget/cardSwap.dart';
 import '../constant.dart';
 import 'homeBottomBar.dart';
@@ -15,12 +19,24 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  late FlutterGifController controller;
   @override
   void initState() {
     // TODO: implement initState
+    controller= FlutterGifController(vsync: this);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.repeat(
+        min: 0,
+        max: 20,
+        period: const Duration(milliseconds: 1000),
+      );
+    });
+
 
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<WeatherProvider>(context, listen: false).getWeather(context);
     });
@@ -31,19 +47,18 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var weather = Provider.of<WeatherProvider>(context);
 
+    // convertLocationToAddress();
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
-      // backgroundColor:weather.weatherData==null
-      //     ?Colors.black :getThemeColor(weather.weatherData!.current!.weatherDescriptions!.first).shade300,
       body: Stack(
         children: [
           weather.weatherData == null
               ? Container(
-            height: double.infinity,
-            width: double.infinity,
-            color: Colors.black,
-          )
+                  height: double.infinity,
+                  width: double.infinity,
+                  color: Colors.black,
+                )
               : Image.asset(
                   getImageBg(
                       weather.weatherData!.current!.weatherDescriptions!.first),
@@ -80,6 +95,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
                                   children: [
@@ -88,8 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       color: Colors.white,
                                     ),
                                     Text(
-                                      Provider.of<WeatherProvider>(context)
-                                          .cityName,
+                                      weather.weatherData!.location!.name ?? '',
                                       style: const TextStyle(
                                           fontSize: 40,
                                           color: Colors.white70,
@@ -98,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ],
                                 ),
                                 Text(
-                                  '${weather.weatherData!.location!.country ?? ''} - ${weather.weatherData!.current!.observationTime.toString()}',
+                                  '  ${weather.weatherData!.location!.country ?? ''} - ${weather.weatherData!.current!.observationTime.toString()}',
                                   style: const TextStyle(
                                       fontSize: 18,
                                       color: Colors.white70,
@@ -118,47 +134,67 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Column(
+                            Row(
                               children: [
-                                Image.asset(
-                                  getImage(weather.weatherData!.current!
-                                      .weatherDescriptions!.first),
-                                  width: 100,
-                                  fit: BoxFit.fill,
-                                ),
-                                Container(
-                                  width: w*0.4,
-                                  child: Text(
-                                      weather.weatherData!.current!
-                                          .weatherDescriptions!.first,
-                                      style: const TextStyle(
-                                          fontSize: 25,
-                                          color: Colors.white70,
-                                          fontWeight: FontWeight.w400),),
+                                SizedBox(
+                                  width: w / 2,
+                                  child: DefaultTextStyle(
+                                    style: const TextStyle(
+                                        fontSize: 70.0,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white),
+                                    child: AnimatedTextKit(
+                                      animatedTexts: [
+                                        WavyAnimatedText(
+                                            '${weather.weatherData!.current!.temperature.toString()} °c'),
+                                      ],
+                                      isRepeatingAnimation: true,
+                                      onTap: () {},
+                                    ),
+                                  ),
                                 )
                               ],
                             ),
-                            Row(
+                            // SizedBox(width: 30,),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
-                                    weather.weatherData!.current!.temperature
-                                        .toString(),
-                                    style: const TextStyle(
-                                        fontSize: 80,
-                                        color: Colors.white70,
-                                        fontWeight: FontWeight.w600)),
-                                const Text('°c',
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+
+                                  ),
+                                  clipBehavior: Clip.antiAlias,
+                                  width: w*0.14,
+                                  child: GifImage(
+                                    controller: controller,
+                                    image: AssetImage(getImage(weather.weatherData!.current!
+                                        .weatherDescriptions!.first),
+                                      ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: w * 0.35,
+                                  child: Text(
+                                    '     ${weather.weatherData!.current!.weatherDescriptions!.first}',
                                     style: TextStyle(
-                                        fontSize: 50,
-                                        color: Colors.blueAccent,
-                                        fontWeight: FontWeight.w600))
+                                        fontSize: 25,
+                                        color: getColor(weather
+                                            .weatherData!
+                                            .current!
+                                            .weatherDescriptions!
+                                            .first),
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                )
                               ],
                             ),
                           ],
                         ),
                       ),
                       SizedBox(
-                        height: h * 0.2,
+                        height: h * 0.18,
                       ),
                       // Spacer(
                       //   flex: 1,
