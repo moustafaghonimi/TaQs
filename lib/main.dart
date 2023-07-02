@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taqs/provider/weatherProvider.dart';
 import 'package:taqs/screens/home/home_screen.dart';
+import 'package:taqs/screens/search/search.dart';
 
 void main() {
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       initialRoute: HomeScreen.routName,
       routes: {
         HomeScreen.routName: (context) => HomeScreen(),
+        SearchByMap.routName: (context) => SearchByMap(),
       },
     );
   }

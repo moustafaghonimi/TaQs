@@ -80,7 +80,7 @@ class CardPageWidget extends StatelessWidget {
                       page: pageOffset,
                       str1: 'Wind In ${weather.weatherData!.location!.name}',
                       str2:
-                          'Wind Degree ${weather.weatherData!.current!.windDegree}',
+                          'Wind Degree ${weather.weatherData!.current!.windDegree} kmph',
                       str3:
                           'Wind Speed ${weather.weatherData!.current!.windSpeed}',
                       str4:
@@ -101,7 +101,7 @@ class CardPageWidget extends StatelessWidget {
                           str2:
                               'Humidity Degree ${weather.weatherData!.current!.humidity}',
                           str3:
-                              'Pressure ${weather.weatherData!.current!.pressure}',
+                              'Pressure ${weather.weatherData!.current!.pressure} mb',
                           str4:
                               'Humidity Degree ${weather.weatherData!.current!.humidity}',
                           icons: const Icon(
@@ -119,7 +119,7 @@ class CardPageWidget extends StatelessWidget {
                           str2:
                               'Visibility Degree ${weather.weatherData!.current!.visibility}',
                           str3:
-                              'Precip ${weather.weatherData!.current!.precip}',
+                              'Precip ${weather.weatherData!.current!.precip} mm' ,
                           str4:
                               'Visibility Degree ${weather.weatherData!.current!.visibility}',
                           icons: const Icon(

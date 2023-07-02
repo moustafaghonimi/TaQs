@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gif/flutter_gif.dart';
 import 'package:provider/provider.dart';
 import 'package:taqs/provider/weatherProvider.dart';
+import 'package:taqs/screens/search/search.dart';
 
-import '../../location/convertAddresse.dart';
-import '../../location/location.dart';
 import '../../widget/cardSwap.dart';
 import '../constant.dart';
 import 'homeBottomBar.dart';
+import 'package:taqs/screens/waitingScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routName = 'home';
@@ -21,10 +21,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late FlutterGifController controller;
+
   @override
   void initState() {
     // TODO: implement initState
-    controller= FlutterGifController(vsync: this);
+    controller = FlutterGifController(vsync: this);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.repeat(
@@ -33,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         period: const Duration(milliseconds: 1000),
       );
     });
-
 
     super.initState();
 
@@ -54,11 +54,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       body: Stack(
         children: [
           weather.weatherData == null
-              ? Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  color: Colors.black,
-                )
+              ?const WaitingScreen()
               : Image.asset(
                   getImageBg(
                       weather.weatherData!.current!.weatherDescriptions!.first),
@@ -75,14 +71,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       child: Column(
                     children: [
                       const CircularProgressIndicator(
-                        color: Colors.white70,
+                        color: Colors.orange,
                       ),
                       TextButton(
                         onPressed: () {
+                          // Navigator.pushNamed(context, SearchPlacesScreen.routName);
                           Navigator.pushNamed(context, HomeScreen.routName);
                         },
                         child: const Text('press Here To Reload Screen',
-                            style: TextStyle(color: Colors.white70)),
+                            style: TextStyle(color: Colors.orangeAccent)),
                       )
                     ],
                   ))
@@ -104,25 +101,51 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       Icons.location_on_outlined,
                                       color: Colors.white,
                                     ),
-                                    Text(
-                                      weather.weatherData!.location!.name ?? '',
-                                      style: const TextStyle(
-                                          fontSize: 40,
-                                          color: Colors.white70,
-                                          fontWeight: FontWeight.w600),
+                                    SizedBox(
+                                      width: w*0.6,
+                                      child: Text(
+                                        weather.weatherData!.location!.name ?? '',
+                                        style: const TextStyle(
+                                            fontSize: 40,
+                                            color: Colors.white70,
+                                            fontWeight: FontWeight.w600,),maxLines: 2,
+                                      ),
                                     ),
                                   ],
                                 ),
-                                Text(
-                                  '  ${weather.weatherData!.location!.country ?? ''} - ${weather.weatherData!.current!.observationTime.toString()}',
-                                  style: const TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white70,
-                                      fontWeight: FontWeight.w400),
+                                SizedBox(
+                                  width: w*0.65,
+                                  child: Text(
+                                    '  ${weather.weatherData!.location!.country ?? ''} - ${weather.weatherData!.current!.observationTime.toString()}',
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white70,
+                                        fontWeight: FontWeight.w400),
+                                  ),
                                 ),
                               ],
                             ),
-                            const Icon(Icons.search, color: Colors.white),
+                            Column(
+                              children: [
+                                const Text('Search Type'),
+                                IconButton(
+                                  icon: Icon(Icons.map, color: Colors.white),
+                                  onPressed: () {
+
+                                    Navigator.pushNamed(context, SearchByMap.routName);
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.search, color: Colors.white),
+                                  onPressed: () {
+
+                                    Navigator.pushNamed(context, SearchByMap.routName);
+                                    // Navigator.pushNamed(context, SearchByMap.routName);
+                                  },
+                                ),
+                              ],
+                            ),
+
                           ],
                         ),
                       ),
@@ -163,15 +186,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(100),
-
                                   ),
                                   clipBehavior: Clip.antiAlias,
-                                  width: w*0.14,
+                                  width: w * 0.14,
                                   child: GifImage(
                                     controller: controller,
-                                    image: AssetImage(getImage(weather.weatherData!.current!
-                                        .weatherDescriptions!.first),
-                                      ),
+                                    image: AssetImage(
+                                      getImage(weather.weatherData!.current!
+                                          .weatherDescriptions!.first),
+                                    ),
                                   ),
                                 ),
                                 SizedBox(

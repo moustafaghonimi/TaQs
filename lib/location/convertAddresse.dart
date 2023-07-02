@@ -9,8 +9,9 @@ Future<String?> getAddressFromLatLng(double latitude, double longitude) async {
         await placemarkFromCoordinates(latitude, longitude);
     if (placemarks != null && placemarks.isNotEmpty) {
       Placemark placemark = placemarks[0];
-      String address = '${placemark.administrativeArea}';
-      // ${placemark.locality},
+      String address =
+          '${placemark.locality} - ${placemark.country}';
+      //,,${placemark.administrativeArea},,
       return address;
     }
   } catch (e) {

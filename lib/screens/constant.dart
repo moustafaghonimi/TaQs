@@ -16,13 +16,13 @@ Color getColor(String weatherDescriptions) {
     return Colors.white70;
   } else if (weatherDescriptions == 'Freezing fog' ||
       weatherDescriptions== 'Fog' ||
-      weatherDescriptions == 'Heavy Cloud' ||
+      weatherDescriptions == 'Overcast' ||
       weatherDescriptions == 'Mist' ||
       weatherDescriptions == 'Fog') {
     return Colors.white70;
   } else if (weatherDescriptions == 'Patchy rain possible' ||
-      weatherDescriptions == 'Heavy Rain' ||
-      weatherDescriptions == 'Showers	') {
+      weatherDescriptions == 'Light Rain' ||
+      weatherDescriptions == 'Light Rain Shower') {
     return Colors.white70;
   } else if (weatherDescriptions == 'Thundery outbreaks possible' ||
       weatherDescriptions == 'Moderate or heavy snow with thunder' ||
@@ -43,6 +43,9 @@ String getImage(String weatherDescriptions) {
   else if(weatherDescriptions == 'Sunny'){
     return 'assets/images/sunny.gif';
   }
+  else if(weatherDescriptions == 'Overcast'){
+    return 'assets/images/overcast.gif';
+  }
   else if (weatherDescriptions== 'Blizzard' ||
       weatherDescriptions == 'Patchy snow possible' ||
       weatherDescriptions == 'Patchy sleet possible' ||
@@ -51,13 +54,12 @@ String getImage(String weatherDescriptions) {
     return 'assets/images/snow.gif';
   } else if (weatherDescriptions == 'Freezing fog' ||
       weatherDescriptions== 'Fog' ||
-      weatherDescriptions == 'Heavy Cloud' ||
       weatherDescriptions == 'Mist' ||
       weatherDescriptions == 'Fog') {
     return 'assets/images/fog.gif';
   } else if (weatherDescriptions == 'Patchy rain possible' ||
-      weatherDescriptions == 'Heavy Rain' ||
-      weatherDescriptions == 'Showers	') {
+      weatherDescriptions == 'Light Rain' ||
+      weatherDescriptions == 'Light Rain Shower') {
     return 'assets/images/rainy.gif';
   } else if (weatherDescriptions == 'Thundery outbreaks possible' ||
       weatherDescriptions == 'Moderate or heavy snow with thunder' ||
@@ -86,13 +88,13 @@ String getImageBg(String weatherDescriptions) {
     return 'assets/images/snow.jpeg';
   } else if (weatherDescriptions == 'Freezing fog' ||
       weatherDescriptions== 'Fog' ||
-      weatherDescriptions == 'Heavy Cloud' ||
+      weatherDescriptions == 'Overcast' ||
       weatherDescriptions == 'Mist' ||
       weatherDescriptions == 'Fog') {
     return 'assets/images/wind.jpeg';
   } else if (weatherDescriptions == 'Patchy rain possible' ||
-      weatherDescriptions == 'Heavy Rain' ||
-      weatherDescriptions == 'Showers	') {
+      weatherDescriptions == 'Light Rain' ||
+      weatherDescriptions == 'Light Rain Shower') {
     return 'assets/images/rain.jpeg';
   } else if (weatherDescriptions == 'Thundery outbreaks possible' ||
       weatherDescriptions == 'Moderate or heavy snow with thunder' ||
@@ -101,7 +103,7 @@ String getImageBg(String weatherDescriptions) {
       weatherDescriptions == 'Patchy light rain with thunder') {
     return 'assets/images/thunder.jpeg';
   } else {
-    return 'assets/images/clear.png';
+    return 'assets/images/clear.jpeg';
   }
 }
 
@@ -125,13 +127,13 @@ MaterialColor getThemeColor(String weatherDescriptions) {
     return Colors.blue;
   } else if (weatherDescriptions == 'Freezing fog' ||
       weatherDescriptions == 'Fog' ||
-      weatherDescriptions == 'Heavy Cloud' ||
+      weatherDescriptions == 'Overcast' ||
       weatherDescriptions == 'Mist' ||
       weatherDescriptions == 'Fog') {
     return Colors.blueGrey;
   } else if (weatherDescriptions == 'Patchy rain possible' ||
-      weatherDescriptions == 'Heavy Rain' ||
-      weatherDescriptions == 'Showers	') {
+      weatherDescriptions == 'Light Rain' ||
+      weatherDescriptions == 'Light Rain Shower') {
     return Colors.blue;
   } else if (weatherDescriptions == 'Thundery outbreaks possible' ||
       weatherDescriptions == 'Moderate or heavy snow with thunder' ||
